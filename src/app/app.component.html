@@ -1,0 +1,14 @@
+<mat-card style="margin: 4rem">
+  <form [formGroup]="formGroup">
+    <div>
+      <app-checkbox label="Check me!" [isSlider]="true" formControlName="checkbox"></app-checkbox>
+    </div>
+    <br><br>
+    <div>
+      <app-color-input placeholder="Enter color hex value" formControlName="colorHex"></app-color-input>
+    </div>
+    <br><br>
+    <pre>{{formGroup.status|json}}</pre>
+    <pre>{{formGroup.value|json}}</pre>
+  </form>
+</mat-card>
