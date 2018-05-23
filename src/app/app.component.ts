@@ -12,7 +12,7 @@ export class AppComponent {
 
     constructor(private fb: FormBuilder) {
         this.formGroup = this.fb.group({
-            colorHex: [this.detail.colorHex, [validateColorHex(), Validators.maxLength(20), Validators.minLength(2)]],
+            colorHex: [this.detail.colorHex, [validateColorHex(), Validators.maxLength(20), Validators.required, Validators.minLength(2)]],
             checkbox: true
         });
 

@@ -15,7 +15,6 @@ import { ElementBase } from "../base-component";
                    colorHexValidator
                    (blur)="touch()"
                    [placeholder]="placeholder"
-                   [required]="required"
                    [(ngModel)]="value"/>
             <mat-error>
                 <app-validation-messages *ngIf="(invalid | async) && !disabled" [messages]="failures | async">
