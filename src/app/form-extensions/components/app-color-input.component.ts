@@ -15,11 +15,8 @@ import { ElementBase } from "../base-component";
                    colorHexValidator
                    (blur)="touch()"
                    [placeholder]="placeholder"
-                   [type]="type"
                    [required]="required"
-                   [(ngModel)]="value"
-                   [disabled]="disabled"
-                   [pattern]="pattern"/>
+                   [(ngModel)]="value"/>
             <mat-error>
                 <app-validation-messages *ngIf="(invalid | async) && !disabled" [messages]="failures | async">
                 </app-validation-messages>
@@ -35,7 +32,6 @@ export class AppColorInputComponent extends ElementBase<string> implements After
 
     @Input() required: boolean;
     @Input() placeholder: string;
-    @Input() type?: string;
     @Input() hint?: string;
     @Input() patternHelp?: string;
 
