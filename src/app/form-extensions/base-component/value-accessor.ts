@@ -1,53 +1,53 @@
-import {Injector} from '@angular/core';
-import {ControlValueAccessor, NgControl} from '@angular/forms';
+import { Injector } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 export abstract class ValueAccessorBase<T> implements ControlValueAccessor {
-  private innerValue: T;
-  private changed = new Array<(value: T) => void>();
-  private touched = new Array<() => void>();
-  public disabled: boolean;
-  private control: NgControl;
+    private innerValue: T;
+    private changed = new Array<(value: T) => void>();
+    private touched = new Array<() => void>();
+    public disabled: boolean;
+    private control: NgControl;
 
-  protected get formControl(): NgControl {
-    if (this.control != null) {
-      return this.control;
+    protected get formControl(): NgControl {
+        if (this.control != null) {
+            return this.control;
+        }
+
+        this.control = this.theInjector.get(NgControl, null);
+        return this.control;
     }
 
-    this.control = this.theInjector.get(NgControl, null);
-    return this.control;
-  }
-
-  get value(): T {
-    return this.innerValue;
-  }
-
-  set value(value: T) {
-    if (this.innerValue !== value) {
-      this.innerValue = value;
-      this.changed.forEach(f => f(value));
+    get value(): T {
+        return this.innerValue;
     }
-  }
 
-  constructor(private theInjector: Injector) {
-  }
+    set value(value: T) {
+        if (this.innerValue !== value) {
+            this.innerValue = value;
+            this.changed.forEach(f => f(value));
+        }
+    }
 
-  writeValue(value: T) {
-    this.innerValue = value;
-  }
+    constructor(private theInjector: Injector) {
+    }
 
-  registerOnChange(fn: (value: T) => void) {
-    this.changed.push(fn);
-  }
+    writeValue(value: T) {
+        this.innerValue = value;
+    }
 
-  registerOnTouched(fn: () => void) {
-    this.touched.push(fn);
-  }
+    registerOnChange(fn: (value: T) => void) {
+        this.changed.push(fn);
+    }
 
-  setDisabledState(disabled: boolean): void {
-    this.disabled = disabled;
-  }
+    registerOnTouched(fn: () => void) {
+        this.touched.push(fn);
+    }
 
-  touch() {
-    this.touched.forEach(f => f());
-  }
+    setDisabledState(disabled: boolean): void {
+        this.disabled = disabled;
+    }
+
+    touch() {
+        this.touched.forEach(f => f());
+    }
 }
